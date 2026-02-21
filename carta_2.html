@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carta de Amor – Alesita</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&family=Great+Vibes&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  min-height: 100vh;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  overflow-x: hidden;
+  background: #1a0a12;
+}
+
+/* ══ FONDO ANIMADO ══ */
+.bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse at 15% 20%, rgba(180,30,80,0.35) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 75%, rgba(120,15,55,0.3) 0%, transparent 55%),
+    radial-gradient(ellipse at 50% 50%, rgba(80,5,30,0.5) 0%, transparent 70%),
+    #1a0a12;
+}
+
+/* Partículas flotantes */
+.particles { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+.p {
+  position:absolute;
+  opacity:0;
+  animation: rise linear infinite;
+  font-size: 1rem;
+}
+@keyframes rise {
+  0%   { opacity:0; transform: translateY(110vh) scale(0.5) rotate(0deg); }
+  15%  { opacity: 0.7; }
+  85%  { opacity: 0.5; }
+  100% { opacity:0; transform: translateY(-10vh) scale(1.1) rotate(360deg); }
+}
+
+/* ══ HEADER ══ */
+header {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 70px 20px 50px;
+}
+
+.crown {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+/* Tulipan SVG */
+.tulip-svg { width:38px; animation: tulipSway 3s ease-in-out infinite; }
+.tulip-svg:nth-child(2) { animation-delay:.4s; width:46px; }
+.tulip-svg:nth-child(3) { animation-delay:.8s; width:42px; }
+.tulip-svg:nth-child(4) { animation-delay:.3s; width:46px; }
+.tulip-svg:nth-child(5) { animation-delay:.6s; width:38px; }
+@keyframes tulipSway {
+  0%,100% { transform: rotate(-5deg) scale(1); }
+  50%      { transform: rotate(5deg) scale(1.06); }
+}
+
+.main-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(3.5rem, 10vw, 6.5rem);
+  color: #f9a8c9;
+  line-height: 1;
+  animation: shimmer 4s ease-in-out infinite;
+  filter: drop-shadow(0 0 18px rgba(249,168,201,0.5));
+}
+@keyframes shimmer {
+  0%,100% { filter: drop-shadow(0 0 18px rgba(249,168,201,0.4)); color:#f9a8c9; }
+  50%      { filter: drop-shadow(0 0 38px rgba(249,168,201,0.8)); color:#ffc8e0; }
+}
+
+.subtitle {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 1.2rem;
+  color: #e8a0c0;
+  margin-top: 12px;
+  opacity: 0.85;
+  letter-spacing: 0.04em;
+}
+
+.hdr-divider {
+  display: flex; align-items: center; justify-content: center;
+  gap: 12px; margin: 28px auto 0; max-width: 480px;
+}
+.hdr-line {
+  flex:1; height:1px;
+  background: linear-gradient(90deg, transparent, rgba(249,168,201,0.6), transparent);
+}
+.hdr-rose { font-size: 1.4rem; }
+
+/* ══ WRAPPER ══ */
+.wrapper {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  margin: 30px auto 70px;
+  padding: 0 20px;
+}
+
+/* ══ PAPEL ══ */
+.paper {
+  background: linear-gradient(160deg, #fff5f8 0%, #fff0f4 50%, #fdeaf1 100%);
+  border-radius: 3px;
+  padding: 70px 64px;
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    0 2px 4px rgba(0,0,0,0.08),
+    0 8px 24px rgba(0,0,0,0.12),
+    0 30px 80px rgba(140,10,50,0.25),
+    0 0 0 1px rgba(249,168,201,0.2);
+}
+
+/* Líneas sutiles de papel */
+.paper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    transparent,
+    transparent 31px,
+    rgba(249,168,201,0.07) 31px,
+    rgba(249,168,201,0.07) 32px
+  );
+  pointer-events: none;
+}
+
+/* Marco doble interior */
+.paper-frame {
+  position: absolute;
+  inset: 18px;
+  border: 1px solid rgba(249,168,201,0.25);
+  border-radius: 2px;
+  pointer-events: none;
+}
+.paper-frame::after {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border: 1px solid rgba(249,168,201,0.12);
+  border-radius: 1px;
+}
+
+/* Acuarela decorativa */
+.blob {
+  position: absolute;
+  border-radius: 60% 40% 50% 70% / 50% 60% 40% 50%;
+  filter: blur(55px);
+  pointer-events: none;
+}
+.blob1 { width:280px; height:280px; background:#f9a8c9; opacity:0.06; top:-60px; right:-60px; }
+.blob2 { width:220px; height:220px; background:#e57fa0; opacity:0.05; bottom:-50px; left:-50px; }
+.blob3 { width:180px; height:180px; background:#f48fb1; opacity:0.04; top:40%; left:60%; }
+
+/* Flores esquinas decorativas con SVG */
+.corner-deco {
+  position: absolute;
+  width: 90px;
+  opacity: 0.22;
+  animation: cPulse 5s ease-in-out infinite;
+}
+@keyframes cPulse {
+  0%,100% { opacity:.22; transform:scale(1); }
+  50%      { opacity:.35; transform:scale(1.1); }
+}
+.c-tl { top:10px; left:10px; animation-delay:0s; }
+.c-tr { top:10px; right:10px; transform:scaleX(-1); animation-delay:.8s; }
+.c-bl { bottom:10px; left:10px; transform:scaleY(-1); animation-delay:1.6s; }
+.c-br { bottom:10px; right:10px; transform:scale(-1,-1); animation-delay:2.4s; }
+
+/* ══ CONTENIDO ══ */
+.letter-content { position:relative; z-index:1; }
+
+.date {
+  text-align: right;
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 0.95rem;
+  color: #c2185b;
+  margin-bottom: 34px;
+  opacity: 0.65;
+}
+
+.greeting {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  color: #c2185b;
+  text-align: center;
+  margin-bottom: 40px;
+  line-height: 1.2;
+  filter: drop-shadow(0 1px 6px rgba(194,24,91,0.18));
+}
+
+.letter-content p {
+  font-size: 1.12rem;
+  line-height: 2.05;
+  margin-bottom: 24px;
+  text-align: justify;
+  color: #2e1020;
+  font-weight: 300;
+}
+
+/* Drop cap */
+.drop::first-letter {
+  font-family: 'Great Vibes', cursive;
+  font-size: 4.5rem;
+  color: #c2185b;
+  float: left;
+  line-height: 0.7;
+  margin: 10px 10px 0 0;
+  filter: drop-shadow(0 2px 4px rgba(194,24,91,0.2));
+}
+
+.letter-content strong { color: #ad1457; font-weight: 600; }
+.letter-content em     { color: #c2185b; font-style: italic; }
+
+/* Separador interior */
+.inner-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 34px 0;
+}
+.inner-line {
+  flex:1; height:1px;
+  background: linear-gradient(90deg, transparent, rgba(244,143,177,0.5), transparent);
+}
+.inner-icon { font-size: 1.1rem; opacity: 0.6; }
+
+/* Caja de cita */
+.quote-box {
+  position: relative;
+  margin: 36px 0;
+  padding: 28px 42px;
+  background: linear-gradient(135deg,
+    rgba(249,168,201,0.08) 0%,
+    rgba(252,228,236,0.18) 100%);
+  border-radius: 2px;
+  text-align: center;
+}
+.quote-box::before,
+.quote-box::after {
+  content: '';
+  position: absolute;
+  left: 20px; right: 20px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(244,143,177,0.5), transparent);
+}
+.quote-box::before { top: 0; }
+.quote-box::after  { bottom: 0; }
+.quote-icon {
+  display: block;
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  opacity: 0.65;
+}
+.quote-text {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 1.22rem;
+  color: #ad1457;
+  line-height: 1.7;
+  display: block;
+}
+
+/* Firma */
+.signature {
+  margin-top: 52px;
+  text-align: right;
+  padding-top: 22px;
+}
+.sig-line {
+  width: 60%;
+  margin-left: auto;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(244,143,177,0.4));
+  margin-bottom: 18px;
+}
+.sig-closing {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 1rem;
+  color: #ad1457;
+  margin-bottom: 6px;
+  opacity: 0.75;
+}
+.sig-name {
+  font-family: 'Great Vibes', cursive;
+  font-size: 2.8rem;
+  color: #c2185b;
+  line-height: 1.1;
+  filter: drop-shadow(0 1px 4px rgba(194,24,91,0.15));
+}
+.sig-hearts {
+  font-size: 1.2rem;
+  letter-spacing: 8px;
+  margin-top: 10px;
+  opacity: 0.45;
+}
+
+/* ══ FOOTER ══ */
+footer {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 45px 20px 50px;
+}
+.footer-crown {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 18px;
+}
+.footer-crown .tulip-svg { width: 28px; animation: tulipSway 3.5s ease-in-out infinite; }
+.footer-text {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 1.15rem;
+  color: #f9a8c9;
+  margin-bottom: 6px;
+  opacity: 0.85;
+}
+
+/* ══ RESPONSIVE ══ */
+@media (max-width: 580px) {
+  .paper { padding: 44px 28px; }
+  .letter-content p { font-size: 1rem; }
+  .quote-box { padding: 22px 22px; }
+  .drop::first-letter { font-size: 3.5rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg"></div>
+<div class="particles" id="particles"></div>
+
+<!-- ══ HEADER ══ -->
+<header>
+  <div class="crown">
+    <!-- Tulipanes SVG -->
+    <svg class="tulip-svg" viewBox="0 0 60 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M30 60 C30 60 14 48 14 30 C14 16 22 8 30 8 C38 8 46 16 46 30 C46 48 30 60 30 60Z" fill="#e57fa0"/>
+      <path d="M30 60 C30 60 14 48 14 30 C14 16 22 8 30 8" fill="#f9a8c9" opacity=".6"/>
+      <line x1="30" y1="60" x2="30" y2="95" stroke="#5a9a50" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M30 78 Q18 72 16 62" stroke="#5a9a50" stroke-width="2" fill="none" stroke-linecap="round"/>
+    </svg>
+    <svg class="tulip-svg" viewBox="0 0 60 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M30 62 C30 62 12 50 12 28 C12 14 20 5 30 5 C40 5 48 14 48 28 C48 50 30 62 30 62Z" fill="#c2185b"/>
+      <path d="M30 62 C30 62 12 50 12 28 C12 14 20 5 30 5" fill="#f48fb1" opacity=".5"/>
+      <line x1="30" y1="62" x2="30" y2="95" stroke="#4a8040" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M30 76 Q40 70 42 60" stroke="#4a8040" stroke-width="2" fill="none" stroke-linecap="round"/>
+    </svg>
+    <svg class="tulip-svg" viewBox="0 0 60 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M30 58 C30 58 13 46 13 27 C13 13 21 6 30 6 C39 6 47 13 47 27 C47 46 30 58 30 58Z" fill="#e91e8c"/>
+      <path d="M30 58 C30 58 13 46 13 27 C13 13 21 6 30 6" fill="#fce4ec" opacity=".55"/>
+      <line x1="30" y1="58" x2="30" y2="95" stroke="#5a9a50" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M30 80 Q18 74 17 64" stroke="#5a9a50" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M30 72 Q43 67 44 57" stroke="#5a9a50" stroke-width="2" fill="none" stroke-linecap="round"/>
+    </svg>
+    <svg class="tulip-svg" viewBox="0 0 60 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M30 62 C30 62 12 50 12 28 C12 14 20 5 30 5 C40 5 48 14 48 28 C48 50 30 62 30 62Z" fill="#c2185b"/>
+      <path d="M30 62 C30 62 12 50 12 28 C12 14 20 5 30 5" fill="#f48fb1" opacity=".5"/>
+      <line x1="30" y1="62" x2="30" y2="95" stroke="#4a8040" stroke-width="2.5" stroke-linecap="round"/>
+    </svg>
+    <svg class="tulip-svg" viewBox="0 0 60 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M30 60 C30 60 14 48 14 30 C14 16 22 8 30 8 C38 8 46 16 46 30 C46 48 30 60 30 60Z" fill="#e57fa0"/>
+      <path d="M30 60 C30 60 14 48 14 30 C14 16 22 8 30 8" fill="#f9a8c9" opacity=".6"/>
+      <line x1="30" y1="60" x2="30" y2="95" stroke="#5a9a50" stroke-width="2.5" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <h1 class="main-title">Carta de Amor</h1>
+  <p class="subtitle">Para la mujer más especial del mundo</p>
+  <div class="hdr-divider">
+    <div class="hdr-line"></div>
+    <span class="hdr-rose">🌹</span>
+    <div class="hdr-line"></div>
+  </div>
+</header>
+
+<!-- ══ CARTA ══ -->
+<div class="wrapper">
+  <div class="paper">
+    <div class="paper-frame"></div>
+
+    <!-- Flores esquinas SVG -->
+    <svg class="corner-deco c-tl" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="20" cy="20" r="10" fill="#e57fa0"/>
+      <circle cx="40" cy="12" r="8" fill="#f48fb1"/>
+      <circle cx="12" cy="40" r="8" fill="#f48fb1"/>
+      <circle cx="32" cy="32" r="9" fill="#c2185b"/>
+      <circle cx="55" cy="20" r="6" fill="#e57fa0"/>
+      <circle cx="20" cy="55" r="6" fill="#e57fa0"/>
+      <line x1="32" y1="48" x2="32" y2="80" stroke="#5a9a50" stroke-width="2"/>
+      <path d="M32 64 Q18 58 16 50" stroke="#5a9a50" stroke-width="1.5" fill="none"/>
+    </svg>
+    <svg class="corner-deco c-tr" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="20" cy="20" r="10" fill="#e57fa0"/>
+      <circle cx="40" cy="12" r="8" fill="#f48fb1"/>
+      <circle cx="12" cy="40" r="8" fill="#f48fb1"/>
+      <circle cx="32" cy="32" r="9" fill="#c2185b"/>
+      <circle cx="55" cy="20" r="6" fill="#e57fa0"/>
+      <circle cx="20" cy="55" r="6" fill="#e57fa0"/>
+      <line x1="32" y1="48" x2="32" y2="80" stroke="#5a9a50" stroke-width="2"/>
+    </svg>
+    <svg class="corner-deco c-bl" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="20" cy="20" r="10" fill="#e57fa0"/>
+      <circle cx="40" cy="12" r="8" fill="#f48fb1"/>
+      <circle cx="12" cy="40" r="8" fill="#f48fb1"/>
+      <circle cx="32" cy="32" r="9" fill="#c2185b"/>
+      <circle cx="55" cy="20" r="6" fill="#e57fa0"/>
+      <circle cx="20" cy="55" r="6" fill="#e57fa0"/>
+      <line x1="32" y1="48" x2="32" y2="80" stroke="#5a9a50" stroke-width="2"/>
+    </svg>
+    <svg class="corner-deco c-br" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="20" cy="20" r="10" fill="#e57fa0"/>
+      <circle cx="40" cy="12" r="8" fill="#f48fb1"/>
+      <circle cx="12" cy="40" r="8" fill="#f48fb1"/>
+      <circle cx="32" cy="32" r="9" fill="#c2185b"/>
+      <circle cx="55" cy="20" r="6" fill="#e57fa0"/>
+      <circle cx="20" cy="55" r="6" fill="#e57fa0"/>
+      <line x1="32" y1="48" x2="32" y2="80" stroke="#5a9a50" stroke-width="2"/>
+    </svg>
+
+    <div class="blob blob1"></div>
+    <div class="blob blob2"></div>
+    <div class="blob blob3"></div>
+
+    <div class="letter-content">
+
+      <div class="date">· Escrita con el corazón 🌹</div>
+      <div class="greeting">Mi querida Alesita 💕</div>
+
+      <p class="drop">
+        Me encantaría explicarte cómo me haces sentir, pero no hay palabras para describir
+        este sentimiento tan hermoso que despiertas en mí. Solo sé que es algo maravilloso,
+        y que <strong>todo eso es gracias a ti.</strong>
+      </p>
+
+      <p>
+        Me haces sentir un niño amado, un niño querido. Cada vez que te abrazo, siento
+        una tranquilidad única — como si todas mis cargas desaparecieran con cada abrazo tuyo.
+        Con un beso tuyo, <em>mi mundo se llena de colores.</em>
+      </p>
+
+      <div class="inner-div">
+        <div class="inner-line"></div>
+        <span class="inner-icon">🌸</span>
+        <div class="inner-line"></div>
+        <span class="inner-icon">🌷</span>
+        <div class="inner-line"></div>
+        <span class="inner-icon">🌸</span>
+        <div class="inner-line"></div>
+      </div>
+
+      <p>
+        Gracias a ti ya no paso días malos, porque aunque sea con un solo mensaje
+        <strong>me llenas de alegría.</strong> No sé cómo explicarte cuánto te amo.
+        Eres una persona muy especial en mi vida, y eres una niña que con tan solo
+        ver tus ojos <em>me enamora más cada día.</em>
+      </p>
+
+      <div class="quote-box">
+        <span class="quote-icon">🌹</span>
+        <span class="quote-text">
+          "Si esto no es amor, no sé qué sea,<br>
+          pero no quiero dejar de sentirlo jamás."
+        </span>
+      </div>
+      <div class="signature">
+        <div class="sig-line"></div>
+        <p class="sig-closing">Con todo el cariño del mundo,</p>
+        <p class="sig-name">Tu novio 💕</p>
+        <p class="sig-hearts">🌸 🌷 🌹 🌷 🌸</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-crown">
+    <svg class="tulip-svg" viewBox="0 0 60 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M30 60 C30 60 14 48 14 30 C14 16 22 8 30 8 C38 8 46 16 46 30 C46 48 30 60 30 60Z" fill="#e57fa0"/>
+      <line x1="30" y1="60" x2="30" y2="95" stroke="#5a9a50" stroke-width="2.5" stroke-linecap="round"/>
+    </svg>
+    <svg class="tulip-svg" viewBox="0 0 60 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M30 62 C30 62 12 50 12 28 C12 14 20 5 30 5 C40 5 48 14 48 28 C48 50 30 62 30 62Z" fill="#c2185b"/>
+      <line x1="30" y1="62" x2="30" y2="95" stroke="#4a8040" stroke-width="2.5" stroke-linecap="round"/>
+    </svg>
+    <svg class="tulip-svg" viewBox="0 0 60 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M30 58 C30 58 13 46 13 27 C13 13 21 6 30 6 C39 6 47 13 47 27 C47 46 30 58 30 58Z" fill="#e91e8c"/>
+      <line x1="30" y1="58" x2="30" y2="95" stroke="#5a9a50" stroke-width="2.5" stroke-linecap="round"/>
+    </svg>
+    <svg class="tulip-svg" viewBox="0 0 60 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M30 62 C30 62 12 50 12 28 C12 14 20 5 30 5 C40 5 48 14 48 28 C48 50 30 62 30 62Z" fill="#c2185b"/>
+      <line x1="30" y1="62" x2="30" y2="95" stroke="#4a8040" stroke-width="2.5" stroke-linecap="round"/>
+    </svg>
+    <svg class="tulip-svg" viewBox="0 0 60 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M30 60 C30 60 14 48 14 30 C14 16 22 8 30 8 C38 8 46 16 46 30 C46 48 30 60 30 60Z" fill="#e57fa0"/>
+      <line x1="30" y1="60" x2="30" y2="95" stroke="#5a9a50" stroke-width="2.5" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <p class="footer-text">Alesita, eres el amor de mi vida 💕</p>
+  <p class="footer-text" style="opacity:0.65; margin-top:6px; font-size:1rem;">Por siempre tuyo ❤️</p>
+</footer>
+
+<script>
+  // Partículas flotantes
+  const c = document.getElementById('particles');
+  const e = ['🌸','🌷','🌹','💕','✨','💗','🌺','🌷','🌸'];
+  for (let i = 0; i < 30; i++) {
+    const el = document.createElement('div');
+    el.className = 'p';
+    el.textContent = e[Math.floor(Math.random() * e.length)];
+    el.style.cssText = `
+      left: ${Math.random()*100}%;
+      font-size: ${0.7 + Math.random()*1.2}rem;
+      animation-duration: ${10 + Math.random()*12}s;
+      animation-delay: ${Math.random()*16}s;
+    `;
+    c.appendChild(el);
+  }
+</script>
+
+</body>
+</html>
