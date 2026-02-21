@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Te Amo Alesita</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 25%, #ffecd2 50%, #fcb69f 75%, #ff9a9e 100%);
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+
+        /* Patrón de corazones de fondo mejorado */
+        .web-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.15;
+            z-index: 0;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(255, 192, 203, 0.3) 2px, transparent 2px),
+                radial-gradient(circle at 60% 70%, rgba(255, 105, 180, 0.3) 2px, transparent 2px),
+                radial-gradient(circle at 80% 20%, rgba(255, 182, 193, 0.3) 2px, transparent 2px);
+            background-size: 100px 100px, 150px 150px, 120px 120px;
+        }
+        
+        /* Corazones flotantes */
+        .floating-heart {
+            position: absolute;
+            font-size: 2rem;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .floating-heart:nth-child(1) {
+            content: '❤️';
+            top: 10%;
+            left: 15%;
+            animation-delay: 0s;
+        }
+        
+        .floating-heart:nth-child(2) {
+            content: '💕';
+            bottom: 20%;
+            right: 20%;
+            animation-delay: 1s;
+        }
+        
+        .floating-heart:nth-child(3) {
+            content: '💗';
+            top: 50%;
+            left: 5%;
+            animation-delay: 2s;
+        }
+        
+        .floating-heart:nth-child(4) {
+            content: '💖';
+            top: 30%;
+            right: 10%;
+            animation-delay: 3s;
+        }
+        
+        .floating-heart:nth-child(5) {
+            content: '💝';
+            bottom: 40%;
+            left: 25%;
+            animation-delay: 4s;
+        }
+        
+        .floating-heart:nth-child(6) {
+            content: '💓';
+            top: 70%;
+            right: 30%;
+            animation-delay: 5s;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.6; }
+            50% { transform: translateY(-30px) rotate(10deg); opacity: 1; }
+        }
+
+        /* Portada */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+            background: linear-gradient(135deg, rgba(255, 182, 193, 0.9), rgba(255, 192, 203, 0.9));
+            border-bottom: 5px solid #ff69b4;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '💕❤️💗';
+            position: absolute;
+            top: -50px;
+            right: 10%;
+            font-size: 10rem;
+            opacity: 0.2;
+            z-index: 0;
+            animation: snoopyLove 3s ease-in-out infinite;
+            transform-origin: center center;
+        }
+
+        @keyframes snoopyLove {
+            0% { 
+                transform: scale(1) rotate(-5deg); 
+                opacity: 0.15;
+            }
+            50% { 
+                transform: scale(1.1) rotate(5deg); 
+                opacity: 0.3;
+            }
+            100% { 
+                transform: scale(1) rotate(-5deg); 
+                opacity: 0.15;
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            color: #ff1493;
+            text-shadow: 0 0 20px #ff69b4, 0 0 40px #ff1493, 0 5px 10px rgba(255,20,147,0.5);
+            margin-bottom: 20px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            color: #ff1493;
+            text-shadow: 0 0 15px #ff69b4;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .hero .semester {
+            font-size: 1.2rem;
+            color: #c71585;
+            margin-bottom: 40px;
+            font-weight: 500;
+        }
+
+        .spiderman-quote {
+            margin-top: 30px;
+            font-style: italic;
+            color: #ff1493;
+            font-size: 1.5rem;
+            text-shadow: 0 0 15px #ff69b4, 0 0 30px #ff1493;
+            font-weight: bold;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { 
+                text-shadow: 0 0 15px #ff69b4, 0 0 30px #ff1493;
+                transform: scale(1);
+            }
+            50% { 
+                text-shadow: 0 0 25px #ff1493, 0 0 50px #ff69b4, 0 0 70px #c71585;
+                transform: scale(1.05);
+            }
+        }
+
+        /* Catálogo */
+        .catalog {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 80px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .catalog-title {
+            text-align: center;
+            font-size: 3rem;
+            color: #ff1493;
+            text-shadow: 0 0 20px #ff69b4;
+            margin-bottom: 60px;
+            font-weight: bold;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            padding: 20px 0;
+        }
+
+        /* Cards activas */
+        .card {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border: 3px solid rgba(255, 105, 180, 0.5);
+            box-shadow: 0 10px 40px rgba(255, 20, 147, 0.3);
+            position: relative;
+        }
+
+        .card::before {
+            content: '💕';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 2rem;
+            opacity: 0.3;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 20px 60px rgba(255, 20, 147, 0.5);
+            border-color: #ff1493;
+        }
+
+        .card:hover::before {
+            opacity: 1;
+            transform: scale(1.3) rotate(20deg);
+        }
+
+        .card-image {
+            height: 200px;
+            background: linear-gradient(135deg, #ff1493, #ff69b4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-image::after {
+            content: '❤️💕💗';
+            position: absolute;
+            font-size: 4rem;
+            opacity: 0.1;
+            animation: heartPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes heartPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            color: #ff1493;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .card-icon {
+            font-size: 5rem;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .card-content {
+            padding: 30px;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            color: #ff1493;
+            margin-bottom: 20px;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(255, 20, 147, 0.5);
+        }
+
+        .card-content a {
+            display: inline-block;
+            color: #ff1493;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 12px 30px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            border: 2px solid #ff1493;
+        }
+
+        .card-content a:hover {
+            background: #ff1493;
+            color: white;
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(255, 20, 147, 0.5);
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, rgba(255, 20, 147, 0.3), rgba(199, 21, 133, 0.3));
+            backdrop-filter: blur(10px);
+            padding: 60px 20px;
+            text-align: center;
+            position: relative;
+            margin-top: 100px;
+            border-top: 3px solid #ff1493;
+        }
+
+        .footer::before {
+            content: '💕❤️💗💖💝💓';
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3rem;
+            opacity: 0.5;
+        }
+
+        .footer-text {
+            color: #fff;
+            margin: 10px 0;
+            font-size: 1.1rem;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .catalog-title { font-size: 2rem; }
+            .cards-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="web-pattern">
+        <div class="floating-heart">❤️</div>
+        <div class="floating-heart">💕</div>
+        <div class="floating-heart">💗</div>
+        <div class="floating-heart">💖</div>
+        <div class="floating-heart">💝</div>
+        <div class="floating-heart">💓</div>
+    </div>
+
+    <!-- Portada -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>💕 TE AMO ALESITA 💕</h1>
+            <div class="subtitle">MI AMOR ETERNO</div>
+            <div class="semester">UN MENSAJE ESPECIAL PARA TI ❤️</div>
+
+            <div class="spiderman-quote">
+                "Eres el amor de mi vida" 💕
+            </div>
+        </div>
+    </section>
+
+    <!-- Catálogo -->
+    <section class="catalog">
+        <h2 class="catalog-title">💌 CARTA DE AMOR PARA TI 💌</h2>
+
+        <!-- Cards Activas -->
+        <div class="cards-grid">
+            <!-- Card 1: Por qué me gustas -->
+            <div class="card">
+                <div class="card-image">
+                    <span class="card-badge">CON TODO MI CORAZÓN</span>
+                    <div class="card-icon">😍</div>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">GRACIAS POR:</h3>
+                    <a href="carta.html">Leer más →</a>
+                </div>
+            </div>
+            <!-- Card 3: Lo que me haces sentir -->
+            <div class="card">
+                <div class="card-image">
+                    <span class="card-badge">MIS SENTIMIENTOS</span>
+                    <div class="card-icon">💖</div>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">LO QUE ME HACES SENTIR</h3>
+                    <a href="carta_2.html">Leer más →</a>
+                </div>
+            </div>
+
+            <!-- Card 4: Mis promesas para ti -->
+            <div class="card">
+                <div class="card-image">
+                    <span class="card-badge">PROMESAS</span>
+                    <div class="card-icon">💍</div>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">MIS PROMESAS PARA TI</h3>
+                    <a href="carta_3.html">Leer más →</a>
+                </div>
+            </div>
+
+            <!-- Card 5: Te amo por siempre -->
+            <div class="card">
+                <div class="card-image">
+                    <span class="card-badge">AMOR ETERNO</span>
+                    <div class="card-icon">💝</div>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">TE AMO POR SIEMPRE</h3>
+                    <a href="cancion.html">Leer más →</a>
+                </div>
+            </div>
+            <!-- Card 1: Por qué me gustas -->
+            <div class="card">
+                <div class="card-image">
+                    <span class="card-badge">NUESTRAS FOTOS</span>
+                    <div class="card-icon">😍</div>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">NUESTROS RECUERDOS</h3>
+                    <a href="recuerdos.html">Leer más →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p class="footer-text" style="font-size: 1.5rem; color: #ff1493; font-weight: bold; margin-bottom: 20px;">
+            💕 Con todo mi amor para ti, Alesita 💕
+        </p>
+        <p class="footer-text">❤️ Siempre tuyo ❤️</p>
+        <p class="footer-text" style="margin-top: 20px; color: #ff1493; font-size: 1.2rem;">
+            💖 El amor más grande del universo 💖
+        </p>
+    </footer>
+</body>
+</html>
