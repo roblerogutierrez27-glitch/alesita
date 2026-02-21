@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carta 3 – Mis Promesas para Ti</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&family=Great+Vibes&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  min-height: 100vh;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  overflow-x: hidden;
+  background: #0f0818;
+}
+
+/* ══ FONDO ══ */
+.bg {
+  position: fixed; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse at 10% 15%, rgba(160,20,90,0.4) 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 80%, rgba(100,10,60,0.35) 0%, transparent 50%),
+    radial-gradient(ellipse at 55% 45%, rgba(60,0,40,0.6) 0%, transparent 65%),
+    #0f0818;
+}
+
+/* Estrellas fijas */
+.stars { position:fixed; inset:0; z-index:0; pointer-events:none; }
+.star {
+  position:absolute; border-radius:50%;
+  background:#fce4ec;
+  animation: twinkle ease-in-out infinite;
+}
+@keyframes twinkle {
+  0%,100% { opacity:.1; transform:scale(1); }
+  50%      { opacity:.7; transform:scale(1.4); }
+}
+
+/* Partículas flotantes */
+.particles { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+.ptcl {
+  position:absolute; opacity:0;
+  animation: rise linear infinite;
+}
+@keyframes rise {
+  0%   { opacity:0; transform: translateY(110vh) rotate(0deg) scale(.6); }
+  12%  { opacity:.65; }
+  88%  { opacity:.45; }
+  100% { opacity:0; transform: translateY(-8vh) rotate(380deg) scale(1.1); }
+}
+
+/* ══ HEADER ══ */
+header {
+  position:relative; z-index:2;
+  text-align:center;
+  padding: 72px 20px 52px;
+}
+
+.crown {
+  display:flex; justify-content:center; align-items:flex-end;
+  gap:6px; margin-bottom:22px;
+}
+.tulip { animation: sway 3s ease-in-out infinite; }
+.tulip:nth-child(1) { animation-delay:0s; }
+.tulip:nth-child(2) { animation-delay:.3s; }
+.tulip:nth-child(3) { animation-delay:.6s; }
+.tulip:nth-child(4) { animation-delay:.9s; }
+.tulip:nth-child(5) { animation-delay:.45s; }
+.tulip:nth-child(6) { animation-delay:.15s; }
+.tulip:nth-child(7) { animation-delay:.75s; }
+@keyframes sway {
+  0%,100% { transform:rotate(-6deg); }
+  50%      { transform:rotate(6deg) scale(1.05); }
+}
+
+.main-title {
+  font-family:'Great Vibes', cursive;
+  font-size: clamp(2.8rem, 9vw, 6rem);
+  color:#fce4ec;
+  line-height:1.05;
+  animation: glow 4s ease-in-out infinite;
+}
+@keyframes glow {
+  0%,100% { text-shadow:0 0 20px rgba(252,228,236,.35), 0 0 50px rgba(249,168,201,.2); color:#fce4ec; }
+  50%      { text-shadow:0 0 40px rgba(252,228,236,.7), 0 0 80px rgba(249,168,201,.4); color:#fff0f6; }
+}
+
+.subtitle {
+  font-family:'IM Fell English', serif;
+  font-style:italic; font-size:1.15rem;
+  color:#f48fb1; margin-top:12px; opacity:.8;
+  letter-spacing:.05em;
+}
+
+.hdr-div {
+  display:flex; align-items:center; justify-content:center;
+  gap:14px; margin:28px auto 0; max-width:500px;
+}
+.hdr-line {
+  flex:1; height:1px;
+  background:linear-gradient(90deg, transparent, rgba(249,168,201,.55), transparent);
+}
+.hdr-icon { font-size:1.3rem; }
+
+/* ══ WRAPPER ══ */
+.wrapper {
+  position:relative; z-index:2;
+  max-width:810px; margin:32px auto 72px; padding:0 20px;
+}
+
+/* ══ PAPEL ══ */
+.paper {
+  background:linear-gradient(155deg, #fff8fa 0%, #fff3f7 55%, #fdeef4 100%);
+  border-radius:4px;
+  padding:72px 66px;
+  position:relative; overflow:hidden;
+  box-shadow:
+    0 2px 4px rgba(0,0,0,.06),
+    0 10px 30px rgba(0,0,0,.15),
+    0 40px 90px rgba(150,10,60,.3),
+    0 0 0 1px rgba(249,168,201,.18);
+}
+
+/* Líneas papel */
+.paper::before {
+  content:''; position:absolute; inset:0; pointer-events:none;
+  background-image: repeating-linear-gradient(
+    transparent, transparent 31px,
+    rgba(249,168,201,.06) 31px,
+    rgba(249,168,201,.06) 32px
+  );
+}
+
+/* Marco triple interior */
+.frame {
+  position:absolute; inset:16px;
+  border:1px solid rgba(249,168,201,.22);
+  border-radius:3px; pointer-events:none;
+}
+.frame::before {
+  content:''; position:absolute; inset:6px;
+  border:1px solid rgba(249,168,201,.11);
+  border-radius:2px;
+}
+.frame::after {
+  content:''; position:absolute; inset:13px;
+  border:1px dotted rgba(249,168,201,.08);
+  border-radius:1px;
+}
+
+/* Manchas acuarela */
+.blob {
+  position:absolute; border-radius:60% 40% 55% 45% / 48% 55% 45% 52%;
+  filter:blur(55px); pointer-events:none;
+}
+.b1 { width:300px; height:300px; background:#f9a8c9; opacity:.055; top:-70px; right:-70px; }
+.b2 { width:240px; height:240px; background:#e57fa0; opacity:.045; bottom:-55px; left:-55px; }
+.b3 { width:190px; height:190px; background:#f48fb1; opacity:.035; top:38%; left:58%; }
+.b4 { width:160px; height:160px; background:#fce4ec; opacity:.04; top:60%; right:10%; }
+
+/* Flores esquinas */
+.cdeco {
+  position:absolute; width:100px; opacity:.18;
+  animation: cpulse 5s ease-in-out infinite;
+}
+@keyframes cpulse {
+  0%,100% { opacity:.18; transform:scale(1) rotate(0deg); }
+  50%      { opacity:.3; transform:scale(1.1) rotate(3deg); }
+}
+.c-tl { top:8px; left:8px; }
+.c-tr { top:8px; right:8px; transform:scaleX(-1); animation-delay:.7s; }
+.c-bl { bottom:8px; left:8px; transform:scaleY(-1); animation-delay:1.4s; }
+.c-br { bottom:8px; right:8px; transform:scale(-1); animation-delay:2.1s; }
+
+/* ══ CONTENIDO ══ */
+.lc { position:relative; z-index:1; }
+
+.date {
+  text-align:right;
+  font-family:'IM Fell English', serif; font-style:italic;
+  font-size:.92rem; color:#c2185b; margin-bottom:32px; opacity:.6;
+}
+
+.greeting {
+  font-family:'Great Vibes', cursive;
+  font-size:clamp(2.1rem, 5vw, 3.3rem);
+  color:#c2185b; text-align:center; margin-bottom:12px;
+  filter:drop-shadow(0 1px 6px rgba(194,24,91,.2));
+}
+.subgreeting {
+  font-family:'IM Fell English', serif; font-style:italic;
+  text-align:center; font-size:1.1rem; color:#ad1457;
+  margin-bottom:42px; opacity:.75; letter-spacing:.04em;
+}
+
+.lc p {
+  font-size:1.1rem; line-height:2.05; margin-bottom:24px;
+  text-align:justify; color:#2a1018; font-weight:300;
+}
+.lc p.drop::first-letter {
+  font-family:'Great Vibes', cursive;
+  font-size:4.8rem; color:#c2185b;
+  float:left; line-height:.7; margin:10px 10px 0 0;
+  filter:drop-shadow(0 2px 5px rgba(194,24,91,.22));
+}
+.lc strong { color:#ad1457; font-weight:600; }
+.lc em     { color:#c2185b; font-style:italic; }
+
+/* Separador floral */
+.sep {
+  display:flex; align-items:center; justify-content:center;
+  gap:10px; margin:32px 0;
+}
+.sep-line {
+  flex:1; height:1px;
+  background:linear-gradient(90deg, transparent, rgba(244,143,177,.45), transparent);
+}
+.sep-icon { font-size:1rem; opacity:.55; }
+
+/* Caja de cita / promesa */
+.promise-box {
+  position:relative; margin:30px 0; padding:28px 42px 26px;
+  background:linear-gradient(135deg,
+    rgba(249,168,201,.09) 0%,
+    rgba(252,228,236,.2) 100%);
+  border-radius:3px;
+}
+.promise-box::before,.promise-box::after {
+  content:''; position:absolute;
+  left:22px; right:22px; height:1px;
+  background:linear-gradient(90deg, transparent, rgba(244,143,177,.45), transparent);
+}
+.promise-box::before { top:0; }
+.promise-box::after  { bottom:0; }
+.pb-icon { display:block; font-size:1.7rem; text-align:center; margin-bottom:10px; opacity:.6; }
+.pb-text {
+  font-family:'IM Fell English', serif; font-style:italic;
+  font-size:1.2rem; color:#ad1457; line-height:1.75;
+  text-align:center; display:block;
+}
+
+/* Lista de promesas */
+.promises {
+  margin:10px 0 24px 0;
+  list-style:none;
+}
+.promises li {
+  font-size:1.08rem; line-height:1.9;
+  color:#2a1018; font-weight:300;
+  padding:10px 0 10px 36px;
+  position:relative;
+  border-bottom:1px solid rgba(244,143,177,.12);
+}
+.promises li:last-child { border-bottom:none; }
+.promises li::before {
+  content: attr(data-icon);
+  position:absolute; left:4px; top:10px;
+  font-size:1.1rem;
+}
+
+/* Firma */
+.signature {
+  margin-top:52px; text-align:right; padding-top:22px;
+}
+.sig-bar {
+  width:55%; margin-left:auto; height:1px; margin-bottom:18px;
+  background:linear-gradient(90deg, transparent, rgba(244,143,177,.4));
+}
+.sig-closing {
+  font-family:'IM Fell English', serif; font-style:italic;
+  font-size:1rem; color:#ad1457; margin-bottom:6px; opacity:.75;
+}
+.sig-name {
+  font-family:'Great Vibes', cursive;
+  font-size:2.9rem; color:#c2185b; line-height:1.1;
+  filter:drop-shadow(0 1px 5px rgba(194,24,91,.18));
+}
+.sig-hearts {
+  font-size:1.2rem; letter-spacing:7px; margin-top:10px; opacity:.4;
+}
+
+/* ══ FOOTER ══ */
+footer {
+  position:relative; z-index:2;
+  text-align:center; padding:46px 20px 54px;
+}
+.footer-row {
+  display:flex; justify-content:center; align-items:flex-end;
+  gap:6px; margin-bottom:20px;
+}
+.footer-text {
+  font-family:'IM Fell English', serif; font-style:italic;
+  font-size:1.15rem; color:#f9a8c9; margin-bottom:6px; opacity:.85;
+}
+
+/* ══ RESPONSIVE ══ */
+@media (max-width:580px) {
+  .paper { padding:44px 28px; }
+  .lc p { font-size:1rem; }
+  .promise-box { padding:20px 20px; }
+  .lc p.drop::first-letter { font-size:3.6rem; }
+  .promises li { padding-left:28px; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg"></div>
+<div class="stars" id="stars"></div>
+<div class="particles" id="particles"></div>
+
+<!-- ══ HEADER ══ -->
+<header>
+  <div class="crown">
+    <!-- 7 tulipanes SVG en corona -->
+    <svg class="tulip" width="30" height="58" viewBox="0 0 60 100" fill="none"><path d="M30 60C30 60 14 48 14 30C14 16 22 8 30 8C38 8 46 16 46 30C46 48 30 60 30 60Z" fill="#e57fa0"/><path d="M30 60C30 60 14 48 14 30C14 16 22 8 30 8" fill="#f9a8c9" opacity=".5"/><line x1="30" y1="60" x2="30" y2="95" stroke="#5a9a50" stroke-width="2.5" stroke-linecap="round"/><path d="M30 78Q18 72 16 62" stroke="#5a9a50" stroke-width="2" fill="none"/></svg>
+    <svg class="tulip" width="36" height="66" viewBox="0 0 60 100" fill="none"><path d="M30 62C30 62 12 50 12 28C12 14 20 5 30 5C40 5 48 14 48 28C48 50 30 62 30 62Z" fill="#c2185b"/><path d="M30 62C30 62 12 50 12 28C12 14 20 5 30 5" fill="#f48fb1" opacity=".45"/><line x1="30" y1="62" x2="30" y2="95" stroke="#4a8040" stroke-width="2.5" stroke-linecap="round"/><path d="M30 76Q40 70 42 60" stroke="#4a8040" stroke-width="2" fill="none"/></svg>
+    <svg class="tulip" width="40" height="70" viewBox="0 0 60 100" fill="none"><path d="M30 58C30 58 13 46 13 27C13 13 21 6 30 6C39 6 47 13 47 27C47 46 30 58 30 58Z" fill="#e91e8c"/><path d="M30 58C30 58 13 46 13 27C13 13 21 6 30 6" fill="#fce4ec" opacity=".5"/><line x1="30" y1="58" x2="30" y2="95" stroke="#5a9a50" stroke-width="2.5" stroke-linecap="round"/><path d="M30 80Q18 74 17 64" stroke="#5a9a50" stroke-width="2" fill="none"/><path d="M30 72Q43 67 44 57" stroke="#5a9a50" stroke-width="2" fill="none"/></svg>
+    <svg class="tulip" width="44" height="76" viewBox="0 0 60 100" fill="none"><path d="M30 56C30 56 12 44 12 25C12 11 21 3 30 3C39 3 48 11 48 25C48 44 30 56 30 56Z" fill="#d81b60"/><path d="M30 56C30 56 12 44 12 25C12 11 21 3 30 3" fill="#f8bbd0" opacity=".55"/><line x1="30" y1="56" x2="30" y2="95" stroke="#4a8040" stroke-width="3" stroke-linecap="round"/><path d="M30 78Q19 71 18 61" stroke="#4a8040" stroke-width="2" fill="none"/><path d="M30 68Q42 62 43 52" stroke="#4a8040" stroke-width="2" fill="none"/></svg>
+    <svg class="tulip" width="40" height="70" viewBox="0 0 60 100" fill="none"><path d="M30 58C30 58 13 46 13 27C13 13 21 6 30 6C39 6 47 13 47 27C47 46 30 58 30 58Z" fill="#e91e8c"/><path d="M30 58C30 58 13 46 13 27C13 13 21 6 30 6" fill="#fce4ec" opacity=".5"/><line x1="30" y1="58" x2="30" y2="95" stroke="#5a9a50" stroke-width="2.5" stroke-linecap="round"/></svg>
+    <svg class="tulip" width="36" height="66" viewBox="0 0 60 100" fill="none"><path d="M30 62C30 62 12 50 12 28C12 14 20 5 30 5C40 5 48 14 48 28C48 50 30 62 30 62Z" fill="#c2185b"/><path d="M30 62C30 62 12 50 12 28C12 14 20 5 30 5" fill="#f48fb1" opacity=".45"/><line x1="30" y1="62" x2="30" y2="95" stroke="#4a8040" stroke-width="2.5" stroke-linecap="round"/></svg>
+    <svg class="tulip" width="30" height="58" viewBox="0 0 60 100" fill="none"><path d="M30 60C30 60 14 48 14 30C14 16 22 8 30 8C38 8 46 16 46 30C46 48 30 60 30 60Z" fill="#e57fa0"/><path d="M30 60C30 60 14 48 14 30C14 16 22 8 30 8" fill="#f9a8c9" opacity=".5"/><line x1="30" y1="60" x2="30" y2="95" stroke="#5a9a50" stroke-width="2.5" stroke-linecap="round"/></svg>
+  </div>
+
+  <h1 class="main-title">Mis Promesas para Ti</h1>
+  <p class="subtitle">Escritas desde lo más profundo de mi corazón</p>
+  <div class="hdr-div">
+    <div class="hdr-line"></div>
+    <span class="hdr-icon">🌹</span>
+    <span class="hdr-icon">💕</span>
+    <span class="hdr-icon">🌹</span>
+    <div class="hdr-line"></div>
+  </div>
+</header>
+
+<!-- ══ CARTA ══ -->
+<div class="wrapper">
+  <div class="paper">
+    <div class="frame"></div>
+
+    <!-- Flores esquinas SVG -->
+    <svg class="cdeco c-tl" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="18" cy="18" r="10" fill="#e57fa0"/><circle cx="38" cy="10" r="8" fill="#f48fb1"/>
+      <circle cx="10" cy="38" r="8" fill="#f48fb1"/><circle cx="30" cy="30" r="9" fill="#c2185b"/>
+      <circle cx="52" cy="18" r="6" fill="#e57fa0"/><circle cx="18" cy="52" r="6" fill="#e57fa0"/>
+      <line x1="30" y1="46" x2="30" y2="80" stroke="#5a9a50" stroke-width="2"/>
+      <path d="M30 62Q16 56 14 46" stroke="#5a9a50" stroke-width="1.5" fill="none"/>
+      <path d="M30 54Q44 48 46 38" stroke="#5a9a50" stroke-width="1.5" fill="none"/>
+    </svg>
+    <svg class="cdeco c-tr" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="18" cy="18" r="10" fill="#e57fa0"/><circle cx="38" cy="10" r="8" fill="#f48fb1"/>
+      <circle cx="10" cy="38" r="8" fill="#f48fb1"/><circle cx="30" cy="30" r="9" fill="#c2185b"/>
+      <circle cx="52" cy="18" r="6" fill="#e57fa0"/><circle cx="18" cy="52" r="6" fill="#e57fa0"/>
+      <line x1="30" y1="46" x2="30" y2="80" stroke="#5a9a50" stroke-width="2"/>
+    </svg>
+    <svg class="cdeco c-bl" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="18" cy="18" r="10" fill="#e57fa0"/><circle cx="38" cy="10" r="8" fill="#f48fb1"/>
+      <circle cx="10" cy="38" r="8" fill="#f48fb1"/><circle cx="30" cy="30" r="9" fill="#c2185b"/>
+      <circle cx="52" cy="18" r="6" fill="#e57fa0"/><circle cx="18" cy="52" r="6" fill="#e57fa0"/>
+      <line x1="30" y1="46" x2="30" y2="80" stroke="#5a9a50" stroke-width="2"/>
+    </svg>
+    <svg class="cdeco c-br" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="18" cy="18" r="10" fill="#e57fa0"/><circle cx="38" cy="10" r="8" fill="#f48fb1"/>
+      <circle cx="10" cy="38" r="8" fill="#f48fb1"/><circle cx="30" cy="30" r="9" fill="#c2185b"/>
+      <circle cx="52" cy="18" r="6" fill="#e57fa0"/><circle cx="18" cy="52" r="6" fill="#e57fa0"/>
+      <line x1="30" y1="46" x2="30" y2="80" stroke="#5a9a50" stroke-width="2"/>
+    </svg>
+
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div class="blob b3"></div>
+    <div class="blob b4"></div>
+
+    <div class="lc">
+
+      <div class="date">Escrita con el corazón 🌹</div>
+      <div class="greeting">Mi querida Alesita 💕</div>
+      <p class="subgreeting">Hoy quiero decirte algo importante</p>
+
+      <p class="drop">
+        Hoy quiero hacerte <strong>mis promesas</strong>, las que salen directo del corazón,
+        las que pienso cumplir cada día que Dios me permita estar a tu lado.
+        Como dice Joan Sebastian: <em>"Hazme a tu modo, que para ti nací, diseñame,
+        que quiero ser todo lo que te guste."</em> Acepto cualquier cambio, porque
+        lo que quiero es quedarme contigo.
+      </p>
+
+      <div class="sep">
+        <div class="sep-line"></div>
+        <span class="sep-icon">🌷</span>
+        <span class="sep-icon">🌸</span>
+        <span class="sep-icon">🌷</span>
+        <div class="sep-line"></div>
+      </div>
+
+      <!-- Lista de promesas -->
+      <ul class="promises">
+        <li data-icon="🌹">
+          <strong>Te prometo serte fiel</strong>, cada día que esté a tu lado, con toda
+          la honestidad que hay en mi corazón.
+        </li>
+        <li data-icon="💕">
+          <strong>Prometo esforzarme</strong> para ser el mejor hombre para ti,
+          para que siempre me recuerdes con amor y nunca con enojo.
+        </li>
+        <li data-icon="🌷">
+          Tú me dijiste que esto era solo una etapa, pero <strong>si es así,
+          quiero que sea la mejor etapa de tu vida</strong> — que me recuerdes
+          con una sonrisa.
+        </li>
+        <li data-icon="✨">
+          <strong>Prometo estar contigo</strong> en cada día de tu vida,
+          tanto en las malas como en las buenas.
+          Quiero quedarme a tu lado siempre.
+        </li>
+        <li data-icon="🌸">
+          Si Dios lo permite, <strong>quiero que formemos algo más</strong>,
+          porque sueño con un futuro lindo a tu lado.
+          No me importa lo que digan los demás — <em>yo te amo solo a ti.</em>
+        </li>
+        <li data-icon="💛">
+          Eres una persona <strong>muy importante para mí</strong>.
+          Te amo demasiado y quiero quedarme contigo hasta que Dios lo permita.
+        </li>
+      </ul>
+
+      <div class="promise-box">
+        <span class="pb-icon">🌹</span>
+        <span class="pb-text">
+          "Quiero ser tu primer recuerdo cada mañana<br>
+          y tu último pensamiento cada noche."
+        </span>
+      </div>
+
+      <div class="sep">
+        <div class="sep-line"></div>
+        <span class="sep-icon">🌸</span>
+        <span class="sep-icon">💕</span>
+        <span class="sep-icon">🌸</span>
+        <div class="sep-line"></div>
+      </div>
+
+      <div class="promise-box">
+        <span class="pb-icon">💕</span>
+        <span class="pb-text">
+          "Gracias por existir, Alesita.<br>
+          Eres lo más bonito que me ha pasado."
+        </span>
+      </div>
+
+      <div class="signature">
+        <div class="sig-bar"></div>
+        <p class="sig-closing">Con todo el amor del mundo,</p>
+        <p class="sig-name">El niño que más te ama 💕</p>
+        <p class="sig-hearts">🌸 🌷 🌹 🌷 🌸</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-row">
+    <svg class="tulip" width="26" height="52" viewBox="0 0 60 100" fill="none"><path d="M30 60C30 60 14 48 14 30C14 16 22 8 30 8C38 8 46 16 46 30C46 48 30 60 30 60Z" fill="#e57fa0"/><line x1="30" y1="60" x2="30" y2="95" stroke="#5a9a50" stroke-width="2.5" stroke-linecap="round"/></svg>
+    <svg class="tulip" width="32" height="60" viewBox="0 0 60 100" fill="none"><path d="M30 62C30 62 12 50 12 28C12 14 20 5 30 5C40 5 48 14 48 28C48 50 30 62 30 62Z" fill="#c2185b"/><line x1="30" y1="62" x2="30" y2="95" stroke="#4a8040" stroke-width="2.5" stroke-linecap="round"/></svg>
+    <svg class="tulip" width="38" height="68" viewBox="0 0 60 100" fill="none"><path d="M30 58C30 58 13 46 13 27C13 13 21 6 30 6C39 6 47 13 47 27C47 46 30 58 30 58Z" fill="#e91e8c"/><path d="M30 58C30 58 13 46 13 27C13 13 21 6 30 6" fill="#fce4ec" opacity=".45"/><line x1="30" y1="58" x2="30" y2="95" stroke="#5a9a50" stroke-width="2.5" stroke-linecap="round"/><path d="M30 80Q18 74 17 64" stroke="#5a9a50" stroke-width="2" fill="none"/></svg>
+    <svg class="tulip" width="32" height="60" viewBox="0 0 60 100" fill="none"><path d="M30 62C30 62 12 50 12 28C12 14 20 5 30 5C40 5 48 14 48 28C48 50 30 62 30 62Z" fill="#c2185b"/><line x1="30" y1="62" x2="30" y2="95" stroke="#4a8040" stroke-width="2.5" stroke-linecap="round"/></svg>
+    <svg class="tulip" width="26" height="52" viewBox="0 0 60 100" fill="none"><path d="M30 60C30 60 14 48 14 30C14 16 22 8 30 8C38 8 46 16 46 30C46 48 30 60 30 60Z" fill="#e57fa0"/><line x1="30" y1="60" x2="30" y2="95" stroke="#5a9a50" stroke-width="2.5" stroke-linecap="round"/></svg>
+  </div>
+  <p class="footer-text">Alesita, eres el amor de mi vida 💕</p>
+  <p class="footer-text" style="opacity:.6; margin-top:6px; font-size:1rem;">Por siempre tuyo ❤️</p>
+</footer>
+
+<script>
+  // Estrellas
+  const starsEl = document.getElementById('stars');
+  for (let i = 0; i < 60; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const sz = .5 + Math.random() * 2;
+    s.style.cssText = `
+      width:${sz}px; height:${sz}px;
+      top:${Math.random()*100}%; left:${Math.random()*100}%;
+      animation-duration:${2+Math.random()*4}s;
+      animation-delay:${Math.random()*5}s;
+    `;
+    starsEl.appendChild(s);
+  }
+
+  // Partículas
+  const pc = document.getElementById('particles');
+  const icons = ['🌸','🌷','🌹','💕','✨','💗','🌺','🌷','🌸','💖'];
+  for (let i = 0; i < 28; i++) {
+    const el = document.createElement('div');
+    el.className = 'ptcl';
+    el.textContent = icons[Math.floor(Math.random() * icons.length)];
+    el.style.cssText = `
+      left:${Math.random()*100}%;
+      font-size:${.65 + Math.random()*1.1}rem;
+      animation-duration:${11 + Math.random()*13}s;
+      animation-delay:${Math.random()*18}s;
+    `;
+    pc.appendChild(el);
+  }
+</script>
+
+</body>
+</html>
