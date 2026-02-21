@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Songs of Love – Para Alesita</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Pacifico&family=DM+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #f472b6;
+    font-family: 'DM Sans', sans-serif;
+    padding: 30px 20px 60px;
+    min-height: 100vh;
+  }
+
+  .page-title {
+    text-align: center;
+    margin-bottom: 28px;
+    line-height: 1.1;
+  }
+  .title-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .title-songs {
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    font-size: clamp(2.6rem, 9vw, 5rem);
+    color: #111;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+  }
+  .title-of {
+    font-family: 'DM Sans', sans-serif;
+    font-size: clamp(1.6rem, 5vw, 3rem);
+    color: #111;
+    font-weight: 400;
+  }
+  .title-love {
+    font-family: 'Pacifico', cursive;
+    font-size: clamp(2.6rem, 9vw, 5rem);
+    color: #111;
+  }
+  .subtitle-for {
+    font-family: 'Pacifico', cursive;
+    font-size: 1.3rem;
+    color: #fff;
+    margin-top: 6px;
+    opacity: 0.9;
+  }
+
+  /* ── GRID ── */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .card {
+    border-radius: 14px;
+    padding: 18px 17px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-height: 180px;
+    transition: transform 0.22s ease, box-shadow 0.22s ease;
+    cursor: default;
+  }
+  .card:hover {
+    transform: translateY(-5px) rotate(0.5deg);
+    box-shadow: 0 14px 40px rgba(0,0,0,0.25);
+  }
+
+  /* SPANS */
+  .span2 { grid-column: span 2; }
+  .span3 { grid-column: span 3; }
+
+  /* COLORS */
+  .c-red     { background: #e03040; }
+  .c-salmon  { background: #c9603a; }
+  .c-purple  { background: #6d28d9; }
+  .c-wine    { background: #9b2335; }
+  .c-mauve   { background: #a5505e; }
+  .c-olive   { background: #7c6e2a; }
+  .c-teal    { background: #1f7a6e; }
+  .c-yellow  { background: #e8c400; }
+  .c-pink    { background: #d63f72; }
+  .c-green   { background: #1e6e45; }
+  .c-blue    { background: #1e4d9e; }
+  .c-coral   { background: #d45e32; }
+  .c-lilac   { background: #7e4bbf; }
+  .c-mustard { background: #b87d18; }
+
+  /* SONG HEADER */
+  .song-header {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+  }
+  .song-cover {
+    width: 40px; height: 40px;
+    border-radius: 7px;
+    background: rgba(0,0,0,0.22);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+  }
+  .song-name {
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.95);
+    line-height: 1.2;
+  }
+  .song-artist {
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.6);
+    margin-top: 1px;
+  }
+  .dark .song-name  { color: rgba(0,0,0,0.85); }
+  .dark .song-artist { color: rgba(0,0,0,0.5); }
+
+  /* LYRIC */
+  .lyric {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1.35;
+    color: #fff;
+    flex: 1;
+  }
+  .dark .lyric { color: #111; }
+  .lyric.big { font-size: 1.45rem; }
+  .lyric.sm  { font-size: 0.98rem; }
+
+  /* SPOTIFY */
+  .spotify {
+    display: flex; align-items: center; gap: 5px;
+    font-size: 0.68rem; font-weight: 700;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 0.04em;
+  }
+  .dark .spotify { color: rgba(0,0,0,0.4); }
+  .dot { width: 12px; height: 12px; background: #1DB954; border-radius: 50%; }
+
+  /* CARTA CENTRAL */
+  .letter-card {
+    background: #fff8f1;
+    border: 2.5px solid #e03040;
+    border-radius: 14px;
+    padding: 26px 26px 22px;
+    text-align: center;
+    position: relative;
+  }
+  .letter-card::before {
+    content: '💌';
+    position: absolute;
+    top: -20px; left: 50%;
+    transform: translateX(-50%);
+    font-size: 2rem;
+  }
+  .letter-title {
+    font-family: 'Pacifico', cursive;
+    font-size: 1.35rem;
+    color: #e03040;
+    margin-bottom: 10px;
+  }
+  .letter-body {
+    font-size: 0.98rem;
+    line-height: 1.7;
+    color: #333;
+  }
+  .letter-body strong { color: #e03040; }
+
+  @media (max-width: 600px) {
+    .grid { grid-template-columns: 1fr 1fr; }
+    .span2 { grid-column: span 2; }
+    .span3 { grid-column: span 2; }
+  }
+  @media (max-width: 400px) {
+    .grid { grid-template-columns: 1fr; }
+    .span2, .span3 { grid-column: span 1; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-title">
+  <div class="title-row">
+    <span class="title-songs">Songs</span>
+    <span class="title-of">of</span>
+    <span class="title-love">Love</span>
+  </div>
+  <p class="subtitle-for">Para mi Alesita 🌹</p>
+</div>
+
+<div class="grid">
+
+  <!-- 1 -->
+  <div class="card c-red span2">
+    <div class="song-header">
+      <div class="song-cover">🎸</div>
+      <div>
+        <div class="song-name">Imán</div>
+        <div class="song-artist">Joan Sebastian</div>
+      </div>
+    </div>
+    <div class="lyric big">¿Quién te va a querer<br>tanto, <i>tanto</i><br>como yo? 💛</div>
+    <div class="spotify"><div class="dot"></div> Spotify</div>
+  </div>
+
+  <!-- 2 -->
+  <div class="card c-purple">
+    <div class="song-header">
+      <div class="song-cover">🌹</div>
+      <div>
+        <div class="song-name">Tatuajes</div>
+        <div class="song-artist">Joan Sebastian</div>
+      </div>
+    </div>
+    <div class="lyric">Llevo tu nombre grabado en la piel y en el alma</div>
+    <div class="spotify"><div class="dot"></div> Spotify</div>
+  </div>
+
+  <!-- 3 -->
+  <div class="card c-salmon">
+    <div class="song-header">
+      <div class="song-cover">🐦</div>
+      <div>
+        <div class="song-name">Ojitos de Golondrina</div>
+        <div class="song-artist">Joan Sebastian</div>
+      </div>
+    </div>
+    <div class="lyric">Me pierdo en tus ojos<br>y ya no quiero salir</div>
+    <div class="spotify"><div class="dot"></div> Spotify</div>
+  </div>
+
+  <!-- 4 -->
+  <div class="card c-wine">
+    <div class="song-header">
+      <div class="song-cover">🤫</div>
+      <div>
+        <div class="song-name">Secreto de Amor</div>
+        <div class="song-artist">Joan Sebastian</div>
+      </div>
+    </div>
+    <div class="lyric">Eres mi secreto más bello,<br>el que siempre quiero contar</div>
+    <div class="spotify"><div class="dot"></div> Spotify</div>
+  </div>
+
+  <!-- CARTA -->
+  <div class="card letter-card span3" style="min-height:auto; margin-top:6px;">
+    <div class="letter-title">Mi querida Alesita</div>
+    <p class="letter-body">
+      Existen amores que no necesitan explicación — solo sentirlos.<br>
+      Tú eres ese amor. <strong>El que me hace mejor, el que me da sentido.</strong><br>
+      Cada canción que escucho, te la dedico.
+    </p>
+  </div>
+
+  <!-- 5 -->
+  <div class="card c-yellow dark">
+    <div class="song-header">
+      <div class="song-cover">💛</div>
+      <div>
+        <div class="song-name">Me Gustas Mucho</div>
+        <div class="song-artist">Joan Sebastian</div>
+      </div>
+    </div>
+    <div class="lyric">Me gustas mucho,<br>eres lo que siempre<br>había soñado</div>
+    <div class="spotify"><div class="dot"></div> Spotify</div>
+  </div>
+
+  <!-- 6 -->
+  <div class="card c-teal">
+    <div class="song-header">
+      <div class="song-cover">🎶</div>
+      <div>
+        <div class="song-name">El Querer</div>
+        <div class="song-artist">Joan Sebastian</div>
+      </div>
+    </div>
+    <div class="lyric">Tú y yo somos uno mismo,<br>yo sin ti no soy nada, amor</div>
+    <div class="spotify"><div class="dot"></div> Spotify</div>
+  </div>
+
+  <!-- 7 -->
+  <div class="card c-olive">
+    <div class="song-header">
+      <div class="song-cover">🌾</div>
+      <div>
+        <div class="song-name">La Diferencia</div>
+        <div class="song-artist">Joan Sebastian</div>
+      </div>
+    </div>
+    <div class="lyric sm">Cuando lo más común pierda sentido, siempre vas a poder venir conmigo</div>
+    <div class="spotify"><div class="dot"></div> Spotify</div>
+  </div>
+
+  <!-- 8 -->
+  <div class="card c-green span2">
+    <div class="song-header">
+      <div class="song-cover">🌿</div>
+      <div>
+        <div class="song-name">Desde que Llegaste</div>
+        <div class="song-artist">Joan Sebastian</div>
+      </div>
+    </div>
+    <div class="lyric big">Desde que llegaste a mi vida<br>todo lo demás perdió color</div>
+    <div class="spotify"><div class="dot"></div> Spotify</div>
+  </div>
+
+  <!-- 9 -->
+  <div class="card c-mauve">
+    <div class="song-header">
+      <div class="song-cover">💝</div>
+      <div>
+        <div class="song-name">Eso y Más</div>
+        <div class="song-artist">Joan Sebastian</div>
+      </div>
+    </div>
+    <div class="lyric">Te quiero dar<br>eso y más,<br>todo lo que soy</div>
+    <div class="spotify"><div class="dot"></div> Spotify</div>
+  </div>
+
+  <!-- 10 -->
+  <div class="card c-coral">
+    <div class="song-header">
+      <div class="song-cover">🔥</div>
+      <div>
+        <div class="song-name">Mi Vida Eres Tú</div>
+        <div class="song-artist">Joan Sebastian</div>
+      </div>
+    </div>
+    <div class="lyric">No lo pude evitar,<br>me enamoré de ti,<br>me hicieron para ti</div>
+    <div class="spotify"><div class="dot"></div> Spotify</div>
+  </div>
+
+  <!-- 11 -->
+  <div class="card c-blue">
+    <div class="song-header">
+      <div class="song-cover">⭐</div>
+      <div>
+        <div class="song-name">Amarte es un Placer</div>
+        <div class="song-artist">Joan Sebastian</div>
+      </div>
+    </div>
+    <div class="lyric">Amarte es un placer,<br>vivir contigo es lo que quiero hacer</div>
+    <div class="spotify"><div class="dot"></div> Spotify</div>
+  </div>
+
+  <!-- 12 -->
+  <div class="card c-pink span2">
+    <div class="song-header">
+      <div class="song-cover">💌</div>
+      <div>
+        <div class="song-name">Para Siempre</div>
+        <div class="song-artist">Joan Sebastian</div>
+      </div>
+    </div>
+    <div class="lyric big">Te voy a amar hasta que<br>la luna se apague<br>y cada flor se seque 🌹</div>
+    <div class="spotify"><div class="dot"></div> Spotify</div>
+  </div>
+
+  <!-- 13 -->
+  <div class="card c-mustard">
+    <div class="song-header">
+      <div class="song-cover">✨</div>
+      <div>
+        <div class="song-name">Gracias a Ti</div>
+        <div class="song-artist">Joan Sebastian</div>
+      </div>
+    </div>
+    <div class="lyric sm">Eres una obra de arte,<br>con solo mirarte<br>algo da paz 💛</div>
+    <div class="spotify"><div class="dot"></div> Spotify</div>
+  </div>
+
+  <!-- 14 GRAN FINAL -->
+  <div class="card c-lilac span2">
+    <div class="song-header">
+      <div class="song-cover">🙏</div>
+      <div>
+        <div class="song-name">De Ti Platico Yo con Dios</div>
+        <div class="song-artist">Joan Sebastian</div>
+      </div>
+    </div>
+    <div class="lyric big">De ti platico yo con Dios,<br>le digo que eres todo lo que pido 🙏</div>
+    <div class="spotify"><div class="dot"></div> Spotify</div>
+  </div>
+
+  <!-- FIRMA -->
+  <div class="card c-red" style="min-height:100px; justify-content:center; align-items:center; text-align:center;">
+    <div class="lyric" style="text-align:center; font-size:1rem;">Con todo mi amor,<br>tuyo siempre 🤠💛</div>
+  </div>
+
+</div>
+
+</body>
+</html>
